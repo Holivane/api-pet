@@ -1,6 +1,6 @@
 const { ne } = require('sequelize/dist/lib/operators')
 const Modelo = require('./ModeloTabelaFornecedor')
-
+const NaoEncontrado = require('../../erros/NaoEncontrado')
 
 module.exports = {
     listar() {
@@ -17,7 +17,7 @@ module.exports = {
         })
 
         if (!encontrado) {
-            throw new Error('Fornecedor não encontrado')
+            throw new NaoEncontrado()
         }
 
         return encontrado
@@ -32,7 +32,7 @@ module.exports = {
     },
     remover(id) {
         return Modelo.destroy({
-            where: { id: id}
+            where: { id: id }
         })
     }
 }
