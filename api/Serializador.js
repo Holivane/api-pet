@@ -8,7 +8,7 @@ class Serializador {
     serializar (dados) {
         if (this.contentType === 'application/json') {
             return this.json(
-                this.filtrarObjeto(dados)
+                this.filtrar(dados)
             )
         }
 
@@ -25,6 +25,18 @@ class Serializador {
         })
 
         return novoObjeto
+    }
+
+    filtrar (dados) {
+        if (Array.isArray(dados)) {
+            dados = dados.map( item => {
+                return this.filtrarObjeto (item)
+            })
+        } else {
+            dados = this.filtrarObjeto(dados)
+        }
+
+        return dados
     }
 }
 class SerialiazadorFornecedor extends Serializador {
