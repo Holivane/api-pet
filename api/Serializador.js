@@ -7,14 +7,40 @@ class Serializador {
 
     serializar (dados) {
         if (this.contentType === 'application/json') {
-            return this.json(dados)
+            return this.json(
+                this.filtrarObjeto(dados)
+            )
         }
 
         throw new ValorNaoSuportado (this.contentType)
+    }
+
+    filtrarObjeto(dados) {
+        const novoObjeto = {}
+
+        this.camposPublicos.forEach((campo) => {
+            if (dados.hasOwnProperty(campo)) {
+                novoObjeto[campo] = dados[campo]
+            }
+        })
+
+        return novoObjeto
+    }
+}
+class SerialiazadorFornecedor extends Serializador {
+    constructor(contentType) {
+        super()
+        this.contentType = contentType
+        this.camposPublicos = [
+            'id', 
+            'empresa', 
+            'categoria'
+        ]
     }
 }
 
 module.exports = {
     Serializador: Serializador, 
+    SerialiazadorFornecedor: SerialiazadorFornecedor,
     formatosAceitos: ['application/json']
 }
