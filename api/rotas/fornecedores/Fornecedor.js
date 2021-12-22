@@ -2,6 +2,7 @@ const TabelaFornecedor = require('./TabelaFornecedor')
 const CampoInvalido = require('../../erros/CampoInvalido')
 const DadosNaoFornecidos = require('../../erros/DadosNaoFornecidos')
 
+// Classes para interpretar e representar os fornecedores
 class Fornecedor {
 
     constructor({ id, empresa, email, categoria, dataCriacao, dataAtualizacao, versao }) {

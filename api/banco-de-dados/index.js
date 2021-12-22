@@ -1,5 +1,5 @@
-const Sequelize = require('sequelize')
-const config = require('config')
+const Sequelize = require('sequelize') // Criar conexão com banco de dados
+const config = require('config') // Separar as configurações do projeto
 
 const instancia = new Sequelize(
     config.get('mysql.banco-de-dados'),

@@ -1,3 +1,5 @@
+//  Criar Tabela configurada
+
 const Sequelize = require('sequelize')
 const instancia = require('../../banco-de-dados')
 

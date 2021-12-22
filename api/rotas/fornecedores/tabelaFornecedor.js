@@ -1,3 +1,5 @@
+// Conexão entre o código e o banco de dados
+
 const { ne } = require('sequelize/dist/lib/operators')
 const Modelo = require('./ModeloTabelaFornecedor')
 const NaoEncontrado = require('../../erros/NaoEncontrado')

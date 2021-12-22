@@ -1,6 +1,6 @@
-const express = require('express')
+const express = require('express') // Criar API
 const app = express()
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser') // Gerenciar o tipo JSON
 const config = require('config')
 const NaoEncontrado = require('./erros/NaoEncontrado')
 const CampoInvalido = require('./erros/CampoInvalido')
