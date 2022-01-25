@@ -1,4 +1,4 @@
-// Rotas
+// Rotas de fornecedores
 
 const roteador = require('express').Router()
 const TabelaFornecedor = require('./TabelaFornecedor')
@@ -76,5 +76,8 @@ roteador.delete('/:idFornecedor', async (req, res, proximo) => {
         proximo(erro)
     }
 })
+
+const roteadorProdutos = require('./produtos')
+roteador.use('/:idFornecedor/produtos', roteadorProdutos)
 
 module.exports = roteador
