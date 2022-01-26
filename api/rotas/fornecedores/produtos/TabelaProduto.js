@@ -1,11 +1,14 @@
 const Modelo = require('./ModeloTabelaProduto')
 
-modeule.exports = {
+module.exports = {
     listar (idFornecedor) {
         return Modelo.findAll({
             where: {
                 fornecedor: idFornecedor
             }
         })
+    },
+    inserir (dados) {
+        return Modelo.create(dados)
     }
 }
