@@ -1,11 +1,16 @@
+// Rotas de produtos
 const roteador = require('express').Router({ mergeParams: true })
 const Tabela = require('./TabelaProduto')
 const Produto = require('./Produto')
+const Serializador = require('../../../Serializador').SerializadorProduto
 
 roteador.get('/', async (req, res) => {
     const produtos = await Tabela.listar(req.fornecedor.id)
+    const serializador = new Serializador(
+        res.getHeader('Content-Type')
+    )
     res.send(
-        JSON.stringify(produtos)
+        serializador.serializar(produtos)
     )
 })
 
@@ -33,6 +38,23 @@ roteador.delete('/:id', async (req, res) => {
     await produto.apagar()
     res.status(204)
     res.end()
+})
+
+roteador.get('/:id', async (req, res, proximo) => {
+    try {
+        const dados = {
+            id: req.params.id,
+            fornecedor: req.fornecedor.id
+        }
+
+        const produto = new Produto(dados)
+        await produto.carregar()
+        res.send(
+            JSON.stringify(produto)
+        )
+    } catch (erro) {
+        proximo(erro)
+    }
 })
 
 module.exports = roteador
