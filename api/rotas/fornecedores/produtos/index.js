@@ -21,8 +21,13 @@ roteador.post('/', async (req, res, proximo) => {
         const dados = Object.assign({}, corpo, { fornecedor: idFornecedor })
         const produto = new Produto(dados)
         await produto.criar()
+        const serializador = new Serializador(
+            res.getHeader('Content-Type')
+        )
         res.status(201)
-        res.send(produto)
+        res.send(
+            serializador.serializar(produto)
+        )
     } catch (erro) {
         proximo(erro)
     }
@@ -49,8 +54,12 @@ roteador.get('/:id', async (req, res, proximo) => {
 
         const produto = new Produto(dados)
         await produto.carregar()
+        const serializador = new Serializador(
+            res.getHeader('Content-Type'),
+            ['preco', 'estoque', 'fornecedor', 'dataCriacao', 'dataAtualizacao', 'versao']
+        )
         res.send(
-            JSON.stringify(produto)
+            serializador.serializar(produto)
         )
     } catch (erro) {
         proximo(erro)

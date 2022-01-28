@@ -9,7 +9,7 @@ class Serializador {
     xml(dados) {
         let tag = this.tagSingular
 
-        if(Array.isArray(dados)) {
+        if (Array.isArray(dados)) {
             tag = this.tagPlural
             dados = dados.map((item) => {
                 return {
@@ -73,8 +73,8 @@ class SerialiazadorFornecedor extends Serializador {
 }
 
 class SerializadorProduto extends Serializador {
-    constructor (contentType, camposExtras) {
-        super ()
+    constructor(contentType, camposExtras) {
+        super()
         this.contentType = contentType
         this.camposPublicos = [
             'id',
