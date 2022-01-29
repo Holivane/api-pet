@@ -29,6 +29,11 @@ app.use((req, res, proximo) => {
     proximo()
 })
 
+app.use((req, res, proximo) => {
+    res.set('Access-Control-Allow-Origin', '*')
+    proximo()
+})
+
 const roteador = require('./rotas/fornecedores')
 app.use('/api/fornecedores', roteador)
 
